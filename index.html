@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enter Data's Universe: an educational fictional-history archive exploring the life, discoveries, legends, and legacy of Data.">
+  <meta name="theme-color" content="#070b16">
+  <meta property="og:title" content="Data's Universe — The Chronicles of a Legend">
+  <meta property="og:description" content="Explore the fictional life, discoveries, and legends of Data in a futuristic digital history museum.">
+  <title>Data's Universe | The Chronicles of a Legend</title>
+  <style>
+    :root {
+      --bg: #070b16; --panel: rgba(17, 27, 49, .78); --line: rgba(120, 190, 255, .18);
+      --text: #edf5ff; --muted: #9eafc8; --cyan: #65dcff; --violet: #a78bfa;
+      --gold: #f4d28a; --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background:
+      radial-gradient(ellipse at 15% 5%, rgba(37, 99, 235, .18), transparent 34rem),
+      radial-gradient(ellipse at 85% 25%, rgba(124, 58, 237, .13), transparent 34rem), var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(7,11,22,.78); border-bottom: 1px solid var(--line); }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 900; letter-spacing: .12em; font-size: .95rem; }
+    .brand span { color: var(--cyan); }
+    .navlinks { display: flex; gap: 22px; color: var(--muted); font-size: .9rem; }
+    .navlinks a:hover { color: var(--cyan); }
+    .menu { display: none; border: 1px solid var(--line); color: var(--text); background: var(--panel); border-radius: 10px; padding: 8px 12px; }
+    .hero { min-height: 690px; display: grid; align-items: center; padding: 90px 0 80px; position: relative; overflow: hidden; }
+    .hero:after { content:""; position:absolute; width:480px; height:480px; right:4%; top:12%; border:1px solid rgba(101,220,255,.22); border-radius:50%; box-shadow:0 0 80px rgba(40,150,255,.1), inset 0 0 80px rgba(40,150,255,.08); }
+    .hero:before { content:""; position:absolute; width:340px; height:340px; right:10%; top:22%; border:1px dashed rgba(167,139,250,.35); border-radius:50%; }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .eyebrow { color: var(--cyan); letter-spacing: .22em; text-transform: uppercase; font-size: .75rem; font-weight: 800; }
+    h1 { font-size: clamp(3rem, 8vw, 6.7rem); line-height: .98; letter-spacing: -.065em; margin: 18px 0 24px; }
+    h1 span { background: linear-gradient(100deg, #fff 10%, var(--cyan) 55%, var(--violet)); color: transparent; background-clip: text; }
+    .lead { color: #b8c8df; font-size: clamp(1.05rem, 2vw, 1.25rem); max-width: 650px; }
+    .actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:32px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:12px; padding:12px 19px; font-weight:800; border:1px solid var(--line); transition:.2s; }
+    .primary { color:#04111d; background:linear-gradient(100deg,var(--cyan),#a5efff); border:0; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 10px 35px rgba(65,190,255,.18); }
+    .orbit-label { position:absolute; right:13%; top:49%; z-index:1; color:var(--cyan); text-align:center; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
+    .orbit-label strong { display:block; color:white; font-size:2.4rem; letter-spacing:-.05em; }
+    .notice { border:1px solid rgba(244,210,138,.28); background:rgba(244,210,138,.07); color:#e8d6ad; border-radius:12px; padding:13px 16px; font-size:.88rem; margin-top:28px; max-width:680px; }
+    section { padding:88px 0; }
+    .section-head { max-width:700px; margin-bottom:34px; }
+    .kicker { color:var(--cyan); text-transform:uppercase; letter-spacing:.2em; font-size:.72rem; font-weight:800; }
+    h2 { font-size:clamp(2rem,4vw,3.3rem); letter-spacing:-.045em; line-height:1.1; margin:10px 0 14px; }
+    .section-head p, .muted { color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card { border:1px solid var(--line); background:linear-gradient(145deg,rgba(20,34,59,.88),rgba(10,17,32,.8)); border-radius:18px; padding:24px; box-shadow:0 12px 50px rgba(0,0,0,.12); }
+    .card .icon { width:44px; height:44px; display:grid; place-items:center; border:1px solid var(--line); border-radius:13px; color:var(--cyan); font-size:1.3rem; margin-bottom:18px; background:rgba(101,220,255,.06); }
+    .card h3 { margin:0 0 8px; font-size:1.15rem; }
+    .card p { color:var(--muted); margin:0; font-size:.94rem; }
+    .timeline { border-left:1px solid rgba(101,220,255,.35); margin-left:12px; padding-left:28px; display:grid; gap:22px; }
+    .event { position:relative; padding:20px 22px; border:1px solid var(--line); background:var(--panel); border-radius:14px; }
+    .event:before { content:""; position:absolute; width:11px; height:11px; background:var(--cyan); border-radius:50%; left:-35px; top:27px; box-shadow:0 0 16px var(--cyan); }
+    .year { color:var(--gold); font-weight:900; letter-spacing:.08em; font-size:.8rem; }
+    .event h3 { margin:5px 0; }
+    .story { min-height:100%; display:flex; flex-direction:column; }
+    .story .tag { color:var(--violet); font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; font-weight:900; }
+    .story .read { margin-top:auto; padding-top:20px; color:var(--cyan); font-weight:800; font-size:.9rem; }
+    .quote { font-size:clamp(1.4rem,3vw,2.3rem); line-height:1.35; letter-spacing:-.025em; color:#dcecff; border-left:3px solid var(--cyan); padding:8px 0 8px 25px; max-width:850px; }
+    .quizbox { max-width:760px; }
+    .quizbox button { cursor:pointer; width:100%; text-align:left; margin:7px 0; padding:12px 15px; border-radius:10px; border:1px solid var(--line); color:var(--text); background:#101b30; }
+    .quizbox button:hover { border-color:var(--cyan); }
+    #quiz-result { min-height:28px; color:var(--cyan); font-weight:700; margin-top:12px; }
+    footer { border-top:1px solid var(--line); padding:32px 0; color:var(--muted); font-size:.85rem; }
+    footer .foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:15px; }
+    @media(max-width:760px) {
+      .navlinks { display:none; position:absolute; top:72px; left:0; right:0; padding:18px 22px; background:#0a1020; border-bottom:1px solid var(--line); flex-direction:column; }
+      .navlinks.open { display:flex; } .menu { display:block; }
+      .hero { min-height:620px; } .hero:after { width:270px; height:270px; right:-100px; top:15%; } .hero:before { width:190px; height:190px; right:-60px; top:23%; }
+      .orbit-label { right:8%; top:43%; opacity:.65; } .orbit-label strong { font-size:1.6rem; }
+      .grid { grid-template-columns:1fr; } section { padding:66px 0; }
+    }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*:before,*:after{transition:none!important} }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#home">DATA<span>'S</span> UNIVERSE</a>
+      <button class="menu" id="menu-button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+      <div class="navlinks" id="navlinks">
+        <a href="#biography">Biography</a><a href="#timeline">Timeline</a><a href="#stories">Legends</a><a href="#archive">Archive</a><a href="#quiz">Quiz</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">A digital museum of imagined history</div>
+      <h1>THE STORY<br>OF <span>DATA.</span></h1>
+      <p class="lead">One curious mind. A thousand unanswered questions. A legacy that travelled further than the stars. Step into the fictional chronicles of Data.</p>
+      <div class="actions">
+        <a class="btn primary" href="#biography">Explore the archive ↗</a>
+        <a class="btn" href="#timeline">View the timeline</a>
+      </div>
+      <div class="notice"><strong>Historical-fiction notice:</strong> Data and the events in this archive are invented for a creative educational project. They are not verified historical facts.</div>
+    </div>
+    <div class="orbit-label" aria-hidden="true"><strong>01</strong>THE BEGINNING</div>
+  </section>
+
+  <section id="biography">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Chapter I · The person behind the legend</div>
+        <h2>A life shaped by questions.</h2>
+        <p>In the world of this story, Data was remembered not because he possessed every answer, but because he refused to stop asking questions. His journey became a symbol of curiosity, learning, and the courage to imagine something better.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">⌁</div><h3>The curious beginning</h3><p>According to the fictional archive, Data grew up in a small riverside town where old maps, broken instruments, and forgotten books fascinated him.</p></article>
+        <article class="card"><div class="icon">✧</div><h3>A restless inventor</h3><p>He filled notebooks with sketches and questions. His early experiments were imperfect, but each failure taught him to observe more carefully.</p></article>
+        <article class="card"><div class="icon">◎</div><h3>A lasting idea</h3><p>Data believed knowledge should be shared. In the legend, his greatest achievement was inspiring others to become explorers of their own world.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Chapter II · A fictional chronology</div>
+        <h2>Moments across the ages.</h2>
+        <p>These dates belong to the invented timeline of Data's Universe. They are story landmarks, not real historical dates.</p>
+      </div>
+      <div class="timeline">
+        <article class="event"><div class="year">1847 · THE FIRST SPARK</div><h3>A question beneath the observatory</h3><p class="muted">Young Data discovers an abandoned notebook filled with diagrams of the night sky. It becomes the beginning of his lifelong search for understanding.</p></article>
+        <article class="event"><div class="year">1863 · THE NOTEBOOK PROJECT</div><h3>Knowledge for everyone</h3><p class="muted">Data begins collecting explanations of science, history, and nature in a series of illustrated notebooks that can be shared with his neighbours.</p></article>
+        <article class="event"><div class="year">1871 · THE GREAT EXHIBITION</div><h3>A room full of impossible ideas</h3><p class="muted">He presents a fictional collection of models and experiments, inviting visitors to test ideas instead of simply accepting them.</p></article>
+        <article class="event"><div class="year">1890 · THE OPEN ARCHIVE</div><h3>A library without locked doors</h3><p class="muted">The legend says Data helps establish an archive where curious minds can learn, question, and contribute discoveries.</p></article>
+        <article class="event"><div class="year">1901 · THE LAST MESSAGE</div><h3>Leave the next page blank</h3><p class="muted">Before disappearing from public life, Data leaves one final note: the future belongs to those willing to keep learning.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="stories">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Chapter III · Tales from the legend</div>
+        <h2>Stories from Data's world.</h2>
+        <p>Three short fictional accounts explore the values associated with the character: curiosity, patience, and sharing knowledge.</p>
+      </div>
+      <div class="grid">
+        <article class="card story"><div class="tag">Legend 01 · Curiosity</div><h3>The Clock That Forgot Time</h3><p>In a quiet workshop, Data found a clock that had stopped at midnight. Rather than repairing it immediately, he studied its gears, asking what each piece was designed to do. By sunset, he had learned more from the silent clock than from a hundred working ones.</p><a class="read" href="#archive">Read the lesson ↓</a></article>
+        <article class="card story"><div class="tag">Legend 02 · Courage</div><h3>The Map Beyond the Mountains</h3><p>A mapmaker told Data that the mountains marked the edge of the known world. Data did not claim the map was wrong; he simply asked how anyone could know without looking. His expedition returned with new sketches—and even more questions.</p><a class="read" href="#archive">Read the lesson ↓</a></article>
+        <article class="card story"><div class="tag">Legend 03 · Generosity</div><h3>The Library of Borrowed Stars</h3><p>Data imagined a library where every visitor could borrow an idea and return with a better one. The library became the heart of his legend: a place where learning was not guarded like treasure, but passed from person to person.</p><a class="read" href="#archive">Read the lesson ↓</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Chapter IV · The archive</div>
+        <h2>What the legend teaches.</h2>
+      </div>
+      <p class="quote">“A discovery is not the end of a question. It is the beginning of a better one.”</p>
+      <p class="muted" style="margin-top:12px">— A fictional quotation attributed to Data</p>
+      <div class="grid" style="margin-top:34px">
+        <article class="card"><h3>Think critically</h3><p>Ask where information comes from. Compare explanations and look for evidence before accepting a claim.</p></article>
+        <article class="card"><h3>Learn through discovery</h3><p>Observe, experiment safely, take notes, and treat mistakes as opportunities to improve your understanding.</p></article>
+        <article class="card"><h3>Share what you learn</h3><p>Explain ideas clearly and respectfully. Knowledge becomes more useful when other people can explore it too.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Chapter V · Test your knowledge</div>
+        <h2>The explorer's quiz.</h2>
+        <p>Check what you remember from this fictional archive.</p>
+      </div>
+      <div class="card quizbox">
+        <h3 id="question">1. What did Data believe people should do with knowledge?</h3>
+        <button data-answer="wrong">Keep it secret</button>
+        <button data-answer="correct">Share it with others</button>
+        <button data-answer="wrong">Never question it</button>
+        <div id="quiz-result" role="status" aria-live="polite"></div>
+        <button id="next-question" class="btn primary" style="display:none; width:auto; text-align:center">Next question →</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><strong>DATA'S UNIVERSE</strong><br> A fictional-history learning project.</div>
+    <div>Created for curious minds · All dates, events, and quotations are imaginary.</div>
+    <div><a href="#home">Back to top ↑</a></div>
+  </div>
+</footer>
+
+<script>
+  const menuButton = document.getElementById('menu-button');
+  const navlinks = document.getElementById('navlinks');
+  menuButton.addEventListener('click', () => {
+    const open = navlinks.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
+  });
+  navlinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    navlinks.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false');
+  }));
+
+  const questions = [
+    { q: '1. What did Data believe people should do with knowledge?', a: ['Keep it secret', 'Share it with others', 'Never question it'], correct: 1, explain: 'Correct! Sharing knowledge helps more people learn.' },
+    { q: '2. What did Data find in the observatory in 1847?', a: ['A golden crown', 'An old notebook about the sky', 'A time machine'], correct: 1, explain: 'Correct! The notebook sparked his curiosity.' },
+    { q: '3. Are the dates in this archive verified historical facts?', a: ['Yes, all are real', 'No, they are part of a fictional story', 'Only the last date is real'], correct: 1, explain: 'Correct! This site is a work of historical fiction.' }
+  ];
+  let current = 0;
+  const qEl = document.getElementById('question');
+  const result = document.getElementById('quiz-result');
+  const next = document.getElementById('next-question');
+  function loadQuestion() {
+    const q = questions[current]; qEl.textContent = q.q; result.textContent = ''; next.style.display = 'none';
+    document.querySelectorAll('.quizbox button[data-answer]').forEach((b, i) => { b.textContent = q.a[i]; b.disabled = false; b.style.opacity = '1'; });
+  }
+  document.querySelectorAll('.quizbox button[data-answer]').forEach((b, i) => b.addEventListener('click', () => {
+    const q = questions[current];
+    document.querySelectorAll('.quizbox button[data-answer]').forEach(x => x.disabled = true);
+    if (i === q.correct) result.textContent = q.explain;
+    else result.textContent = 'Not quite. ' + q.explain;
+    next.textContent = current === questions.length - 1 ? 'Restart quiz ↻' : 'Next question →';
+    next.style.display = 'inline-flex';
+  }));
+  next.addEventListener('click', () => { current = (current + 1) % questions.length; loadQuestion(); });
+</script>
+</body>
+</html>
